@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Devata & Gumiho - Classified</title>
+    
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Cinzel (Elegant/Header) & Montserrat (Readable) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'valo-red': '#ff4655',
+                        'valo-dark': '#0f1923',
+                        'valo-light': '#ece8e1',
+                        'valo-gray': '#565656'
+                    },
+                    fontFamily: {
+                        'header': ['Cinzel', 'serif'],
+                        'body': ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Valorant Styles & Overrides */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f1923;
+            color: #ece8e1;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, .valo-font {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Scoped Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f1923; }
+        ::-webkit-scrollbar-thumb { background: #ff4655; }
+
+        /* Opening Animation Classes */
+        #opening-curtain {
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 9999;
+        }
+        .curtain-open {
+            transform: translateY(-100%);
+        }
+
+        /* Valorant Shapes (Clip Path) */
+        .valo-box {
+            clip-path: polygon(
+                20px 0, 100% 0, 
+                100% calc(100% - 20px), calc(100% - 20px) 100%, 
+                0 100%, 0 20px
+            );
+        }
+        
+        /* Valorant Button Styling */
+        .valo-btn {
+            position: relative;
+            background-color: #ff4655;
+            color: white;
+            padding: 12px 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            box-shadow: 0 0 10px rgba(255, 70, 85, 0.4);
+        }
+        
+        .valo-btn:hover {
+            background-color: #0f1923;
+            color: #ff4655;
+            box-shadow: inset 0 0 0 2px #ff4655;
+        }
+
+        /* Background Utilities and Parallax */
+        .bg-img-container {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax Effect */
+        }
+
+        /* Gallery Infinite Scroll Animation (To Right) */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .marquee-content {
+            display: inline-flex;
+            animation: scroll-right 25s linear infinite;
+        }
+        @keyframes scroll-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CUSTOM MODAL (Replaces alert) -->
+    <div id="custom-modal" class="fixed inset-0 flex items-center justify-center z-[10000] hidden bg-black/80 backdrop-blur-sm transition-opacity">
+        <div class="bg-valo-dark border-2 border-valo-red p-8 max-w-sm w-full mx-4 valo-box text-center relative transform scale-95 transition-transform duration-300 ease-out">
+            <h3 class="text-2xl text-valo-red font-bold mb-2">NOTIFICATION</h3>
+            <p id="modal-message" class="text-white mb-6 font-body">Pesan di sini.</p>
+            <button onclick="closeModal()" class="valo-btn w-full">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- OPENING SECTION (COVER) -->
+    <div id="opening-curtain" 
+     class="fixed inset-0 w-full h-full bg-cover bg-center flex flex-col justify-end pb-12 items-center" 
+     style="background-image: url('img/small-photo.JPG');">
+
+    <div class="absolute inset-0 bg-gradient-to-t from-valo-dark via-valo-dark/50 to-transparent"></div>
+
+    <div class="relative z-10 text-center px-4 w-full max-w-md">
+        
+        <!-- Intro Text -->
+        <p class="text-valo-red tracking-[0.1em] text-xs md:text-sm font-body mb-3 animate-pulse">
+            MISSION START // WEDDING INVITATION
+        </p>
+
+        <!-- Nama Pengantin -->
+        <h1 class="text-4xl md:text-7xl font-bold text-white mb-2 leading-tight break-words">
+            DEVATA 
+            <br>
+            <span class="text-valo-red font-body font-normal text-2xl md:text-3xl">&</span> 
+            GUMIHO
+        </h1>
+
+        <!-- Tanggal -->
+        <h3 class="text-base md:text-xl font-body text-gray-300 mt-1">
+            21 DECEMBER 2025
+        </h3>
+
+        <!-- Box Nama Tamu -->
+        <div class="my-6 border-l-4 border-valo-red pl-3 text-left bg-black/30 p-3 mx-auto w-full max-w-xs md:max-w-sm rounded-md">
+            <p class="text-gray-300 text-xs md:text-sm uppercase font-body">Kepada Yth:</p>
+            <h2 class="text-xl md:text-3xl font-bold text-white mt-1 break-words" id="guest-name">
+                Bapak/Ibu/Saudara/i
+            </h2>
+        </div>
+
+        <!-- Tombol -->
+        <div class="flex justify-center mt-6">
+            <button id="open-btn" class="valo-btn text-base md:text-lg group px-6 py-3">
+                <span class="mr-2">BUKA UNDANGAN</span>
+                <i class="fa-solid fa-arrow-up group-hover:-translate-y-1 transition-transform"></i>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="relative bg-valo-dark">
+        
+        <!-- SECTION 2: INTRO & DATE -->
+        <section id="section-date" class="bg-img-container min-h-screen flex items-center justify-center py-20 px-4" 
+                 style="background-image: url('img/Bergerak3.gif');">
+            <div class="absolute inset-0 bg-valo-dark/10"></div>
+            
+            <div class="relative z-10 container mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+                <!-- Text Area -->
+                <div class="text-left md:w-1/2" data-aos="fade-right">
+                    <div class="h-1 w-20 bg-valo-red mb-6"></div>
+                    <h2 class="text-4xl md:text-6xl font-bold mb-4">WE ARE <br> GETTING MARRIED</h2>
+                    <p class="text-gray-300 text-lg leading-relaxed font-body">
+                        Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan kami. 
+                    </p>
+                    <div class="mt-8">
+                        <span class="text-6xl font-bold text-valo-red block">21</span>
+                        <span class="text-3xl uppercase tracking-widest block border-b border-gray-600 pb-2 mb-2 font-body">Desember</span>
+                        <span class="text-2xl text-gray-400">2025</span>
+                    </div>
+                </div>
+
+                <!-- Small Photo Right -->
+                <div class="md:w-1/3 flex justify-center md:justify-end" data-aos="fade-left">
+                    <div class="relative w-64 h-80 valo-box border-2 border-valo-red p-2 bg-valo-dark/50 backdrop-blur-sm">
+                        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop" 
+                             alt="Couple Placeholder" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
+                        <!-- Decorative Red Line -->
+                        <div class="absolute top-0 right-0 h-full w-0.5 bg-valo-red transform translate-x-1"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: QUOTES -->
+        <section class="bg-img-container py-20 px-4" style="background-image: url('img/bergerak1.gif');">
+            <div class="absolute inset-0 bg-valo-dark/20"></div>
+            <div class="relative z-10 container mx-auto">
+                
+                <!-- 1 Big Column Quote (First) -->
+                <div class="w-full bg-gradient-to-r from-valo-red/20 to-transparent p-8 border border-white/10 valo-box mb-10" data-aos="zoom-in">
+                    <h3 class="text-2xl md:text-3xl text-center font-bold mb-4">THE HOLY MATRIMONY</h3>
+                    <p class="text-center text-lg md:text-xl font-light font-body">
+                        "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."
+                    </p>
+                    <p class="text-center mt-4 text-valo-red font-bold">- Ar-Rum: 21</p>
+                </div>
+
+                <!-- 3 Columns Small Quotes -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/5 border-l-2 border-valo-red p-6 backdrop-blur-sm" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fa-solid fa-quote-left text-valo-red mb-3"></i>
+                        <p class="italic text-sm font-body">"Dua jiwa, satu takdir, diikat oleh ikrar suci."</p>
+                    </div>
+                    <div class="bg-white/5 border-l-2 border-valo-red p-6 backdrop-blur-sm" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fa-solid fa-heart text-valo-red mb-3"></i>
+                        <p class="italic text-sm font-body">"Cinta sejati adalah komitmen, bukan sekadar emosi."</p>
+                    </div>
+                    <div class="bg-white/5 border-l-2 border-valo-red p-6 backdrop-blur-sm" data-aos="fade-up" data-aos-delay="300">
+                        <i class="fa-solid fa-infinity text-valo-red mb-3"></i>
+                        <p class="italic text-sm font-body">"Bersatu, kami adalah tim terbaik."</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: PROFILES (AGENTS) -->
+        <section class="bg-img-container py-20 px-4" style="background-image: url('img/Bergerak3.gif');">
+            <div class="absolute inset-0 bg-valo-dark/20"></div>
+            <div class="relative z-10 container mx-auto">
+            
+            <div class="container mx-auto text-center mb-12">
+                <h2 class="text-4xl text-white mb-2" data-aos="fade-down">THE AGENTS</h2>
+                <div class="w-24 h-1 bg-valo-red mx-auto"></div>
+            </div>
+
+            <div class="container mx-auto flex flex-col md:flex-row justify-center gap-10 md:gap-20 items-stretch">
+                
+                <!-- Groom: Devatta -->
+                <div class="flex-1 max-w-sm mx-auto group" data-aos="fade-right">
+                    <div class="relative h-96 w-full valo-box overflow-hidden border-2 border-transparent group-hover:border-valo-red transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop" 
+                             class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105" alt="Groom Devatta">
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-6">
+                            <p class="text-valo-red text-sm font-bold tracking-widest font-body">GROOM</p>
+                            <h3 class="text-4xl text-white">DEVATTA</h3>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-center md:text-left border-l-4 border-valo-gray pl-4 group-hover:border-valo-red transition-colors">
+                        <p class="text-sm text-gray-400 font-body">Putra dari:</p>
+                        <p class="text-lg font-bold font-body">Bpk. Nama Ayah Pria</p>
+                        <p class="text-lg font-bold font-body">& Ibu Nama Ibu Pria</p>
+                    </div>
+                </div>
+
+                <!-- Bride: Sela -->
+                <div class="flex-1 max-w-sm mx-auto group" data-aos="fade-left">
+                    <div class="relative h-96 w-full valo-box overflow-hidden border-2 border-transparent group-hover:border-valo-red transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop" 
+                             class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105" alt="Bride Sela">
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-6 text-right">
+                            <p class="text-valo-red text-sm font-bold tracking-widest font-body">BRIDE</p>
+                            <h3 class="text-4xl text-white">SELA</h3>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-center md:text-right border-r-4 border-valo-gray pr-4 group-hover:border-valo-red transition-colors">
+                        <p class="text-sm text-gray-400 font-body">Putri dari:</p>
+                        <p class="text-lg font-bold font-body">Bpk. Nama Ayah Wanita</p>
+                        <p class="text-lg font-bold font-body">& Ibu Nama Ibu Wanita</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 5: EVENT DETAILS, COUNTDOWN & MAP -->
+        <section id="section-date" class="bg-img-container min-h-screen flex items-center justify-center py-20 px-4" 
+                 style="background-image: url('img/bergerak4.gif');">
+            <div class="absolute inset-0 bg-valo-dark/10"></div>
+            
+            <div class="relative z-10 container mx-auto">
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-12 valo-box max-w-4xl mx-auto shadow-2xl shadow-valo-red/20">
+                    
+                    <h2 class="text-center text-3xl mb-10 border-b border-gray-700 pb-4">MISSION DETAILS</h2>
+
+                    <!-- Countdown Timer -->
+                    <div class="text-center mb-10" data-aos="fade-up">
+                        <h3 class="text-2xl text-valo-red mb-4">COUNTDOWN TO STRIKE</h3>
+                        <div id="countdown" class="flex justify-center space-x-4 md:space-x-8">
+                            <!-- Timer units will be populated here by JS -->
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                        <!-- Akad -->
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                            <div class="w-16 h-16 bg-valo-red mx-auto flex items-center justify-center rounded-none mb-4 transform rotate-45">
+                                <i class="fa-solid fa-handshake text-2xl text-white transform -rotate-45"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2">AKAD NIKAH</h3>
+                            <p class="text-gray-300 font-body"><i class="far fa-clock mr-2"></i>08:00 - 10:00 WIB</p>
+                            <p class="text-valo-red font-bold mt-2 font-body"><i class="fa-solid fa-location-dot mr-2"></i>MASJID RAYA</p>
+                        </div>
+
+                        <!-- Resepsi -->
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                            <div class="w-16 h-16 bg-white mx-auto flex items-center justify-center rounded-none mb-4 transform rotate-45 border-2 border-valo-red">
+                                <i class="fa-solid fa-glass-cheers text-2xl text-valo-red transform -rotate-45"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2">RESEPSI</h3>
+                            <p class="text-gray-300 font-body"><i class="far fa-clock mr-2"></i>11:00 - 13:00 WIB</p>
+                            <p class="text-valo-red font-bold mt-2 font-body"><i class="fa-solid fa-location-dot mr-2"></i>RUMAH MEMPELAI WANITA</p>
+                        </div>
+                    </div>
+
+                    <!-- Map -->
+                    <div class="w-full h-64 md:h-80 bg-gray-800 border-2 border-gray-600 relative overflow-hidden" data-aos="zoom-in">
+                        <div class="absolute top-0 left-0 bg-valo-red text-white px-3 py-1 text-xs font-bold z-10">SITE MAP</div>
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Masjid%20Raya%20Istiqlal&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" height="100%" style="border:0; filter: invert(90%) hue-rotate(180deg);" allowfullscreen="" loading="lazy"></iframe>
+                        
+                        <div class="absolute bottom-4 right-4">
+                            <a href="https://maps.app.goo.gl/NGMcG9eYDqMLbp7x9" target="_blank" class="valo-btn text-xs">
+                                <i class="fa-solid fa-map-location-dot mr-2"></i> Buka Google Maps
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: STORIES -->
+        <section id="section-date" class="bg-img-container min-h-screen flex items-center justify-center py-20 px-4" 
+                 style="background-image: url('img/bergerak2.gif');">
+            <div class="absolute inset-0 bg-valo-dark/10"></div>
+            
+            <div class="container mx-auto max-w-3xl">
+                <h2 class="text-center text-4xl mb-12" data-aos="fade-down">OUR STORY</h2>
+                
+                <div class="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-valo-red before:to-transparent">
+                    
+                    <!-- Story 1 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-valo-red bg-valo-dark shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-white">
+                            <i class="fa-solid fa-gamepad text-xs"></i>
+                        </div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-black/60 p-6 border border-white/10 rounded valo-box" data-aos="fade-left">
+                            <div class="flex items-center justify-between space-x-2 mb-1">
+                                <div class="font-bold text-valo-red font-body">Awal Mula</div>
+                                <time class="font-mono text-xs text-white-500">2021</time>
+                            </div>
+                            <p class="text-sm font-body">Bermula dari pertemanan satu tim di Valorant, kami menyadari chemistry di dunia nyata jauh lebih kuat.</p>
+                        </div>
+                    </div>
+
+                    <!-- Story 2 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-valo-red bg-valo-dark shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-white">
+                            <i class="fa-solid fa-ring text-xs"></i>
+                        </div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-black/60 p-6 border border-white/10 rounded valo-box" data-aos="fade-right">
+                            <div class="flex items-center justify-between space-x-2 mb-1">
+                                <div class="font-bold text-valo-red font-body">Komitmen</div>
+                                <time class="font-mono text-xs text-white-500">2024</time>
+                            </div>
+                            <p class="text-sm font-body">Setelah menaklukkan rank Immortal bersama, kami memutuskan untuk naik ke level yang lebih serius: Pernikahan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: GALLERY (LOOPING RIGHT) -->
+        <section class="py-12 bg-black border-y border-valo-red/30">
+            <h2 class="text-center text-3xl mb-8 text-gray-500 tracking-[0.5em]">GALLERY // MEMORIES</h2>
+            
+            <div class="marquee-container">
+                <div class="marquee-content gap-4">
+                    <!-- Images duplicated for loop effect (Total 8 unique images, displayed twice) -->
+                    <!-- Loop 1 -->
+                    <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1529636721198-d877c8e964ac?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    
+                    <!-- Loop 2 (Exact Duplicate for seamless animation) -->
+                    <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1529636721198-d877c8e964ac?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                    <img src="https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop" class="h-64 w-48 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-2 border-transparent hover:border-valo-red">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: WEDDING GIFT (ATM CARD STYLE) -->
+        <section class="bg-img-container py-20 px-4" style="background-image: url('img/bergerak6.gif');">
+            <div class="absolute inset-0 bg-valo-dark/50"></div>
+            
+            <div class="relative z-10 container mx-auto text-center max-w-4xl">
+                <h2 class="text-4xl mb-10">WEDDING GIFT // TRANSFER DATA</h2>
+                <p class="text-gray-400 mb-10 font-body">Jika Anda berkenan memberikan hadiah, Anda dapat mengirimkannya melalui rekening di bawah ini. Terima kasih!</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Card 1: Seabank -->
+                    <div class="p-6 bg-gray-900 border border-valo-red shadow-lg valo-box relative overflow-hidden" data-aos="flip-left">
+                        <!-- Card Design (Minimalist/Elegant) -->
+                        <div class="text-left">
+                            <i class="fa-solid fa-credit-card text-4xl text-valo-red mb-4"></i>
+                            <p class="text-sm font-body text-gray-400">BANK ACCOUNT // SEABANK</p>
+                            <p class="text-4xl tracking-wider font-mono my-2 text-white" id="norek1">7458 7754 89</p>
+                            <div class="flex justify-between items-center mt-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 font-body">Account Holder</p>
+                                    <p class="text-lg font-bold text-valo-light font-body">DEVATA</p>
+                                </div>
+                                <button onclick="copyToClipboard('7458775489', 'Seabank')" class="text-valo-red hover:text-white border border-valo-red hover:bg-valo-red px-4 py-1 text-sm transition-all uppercase valo-btn-small">
+                                    <i class="fa-regular fa-copy mr-1"></i> Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: BCA -->
+                    <div class="p-6 bg-gray-900 border border-valo-red shadow-lg valo-box relative overflow-hidden" data-aos="flip-right">
+                        <!-- Card Design (Minimalist/Elegant) -->
+                        <div class="text-left">
+                            <i class="fa-solid fa-wallet text-4xl text-valo-red mb-4"></i>
+                            <p class="text-sm font-body text-gray-400">BANK ACCOUNT // BCA</p>
+                            <p class="text-4xl tracking-wider font-mono my-2 text-white" id="norek2">5468 7894</p>
+                            <div class="flex justify-between items-center mt-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 font-body">Account Holder</p>
+                                    <p class="text-lg font-bold text-valo-light font-body">SELA</p>
+                                </div>
+                                <button onclick="copyToClipboard('54687894', 'BCA')" class="text-valo-red hover:text-white border border-valo-red hover:bg-valo-red px-4 py-1 text-sm transition-all uppercase valo-btn-small">
+                                    <i class="fa-regular fa-copy mr-1"></i> Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAST SECTION: RSVP & UCAPAN PUBLIK -->
+        <section class="py-20 px-4 bg-valo-dark relative border-t-4 border-valo-red">
+            <div class="container mx-auto max-w-xl relative z-10">
+                <h2 class="text-4xl text-center mb-8">CONFIRM ATTENDANCE</h2>
+                
+                <form id="rsvpForm" class="bg-white/5 p-8 border-2 border-gray-700 valo-box space-y-6" onsubmit="submitRSVP(event)">
+                    <div>
+                        <label for="rsvp-name" class="block text-xs uppercase tracking-widest text-valo-red mb-1 font-body">Nama Lengkap</label>
+                        <input type="text" id="rsvp-name" class="w-full bg-valo-dark border border-gray-600 p-3 text-white focus:outline-none focus:border-valo-red transition-colors" placeholder="Nama Anda (untuk ucapan)" required>
+                    </div>
+                    
+                    <div>
+                        <label for="rsvp-guest-count" class="block text-xs uppercase tracking-widest text-valo-red mb-1 font-body">Jumlah Tamu</label>
+                        <select id="rsvp-guest-count" class="w-full bg-valo-dark border border-gray-600 p-3 text-white focus:outline-none focus:border-valo-red transition-colors font-body">
+                            <option value="1">1 Orang</option>
+                            <option value="2">2 Orang</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-valo-red mb-1 font-body">Konfirmasi Kehadiran</label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center space-x-2 cursor-pointer font-body">
+                                <input type="radio" name="attend" value="Hadir" class="accent-valo-red" checked>
+                                <span>Hadir</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer font-body">
+                                <input type="radio" name="attend" value="Tidak Hadir" class="accent-valo-red">
+                                <span>Tidak Hadir</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="rsvp-message" class="block text-xs uppercase tracking-widest text-valo-red mb-1 font-body">Ucapan & Doa Restu</label>
+                        <textarea id="rsvp-message" class="w-full bg-valo-dark border border-gray-600 p-3 text-white focus:outline-none focus:border-valo-red transition-colors h-24 font-body" placeholder="Berikan ucapan selamat Anda di sini..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="valo-btn w-full text-center" id="rsvp-submit-btn">
+                        KIRIM KONFIRMASI & UCAPAN
+                    </button>
+                </form>
+
+                <!-- UCAPAN TAMU (PUBLIC) -->
+                <div class="mt-20">
+                    <h2 class="text-3xl text-center mb-8 border-b-2 border-valo-red/50 pb-4">GUEST MESSAGES</h2>
+                    <div id="greetings-list" class="space-y-4">
+                        <!-- Ucapan akan dimuat di sini oleh JS -->
+                        <p class="text-center text-gray-500 font-body">Memuat ucapan...</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12 text-gray-500 text-sm font-body">
+                    <p>&copy; 2025 Devata & Gumiho Wedding.</p>
+                    <p class="text-xs mt-1">Design inspired by Valorant</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FIREBASE AND AOS SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, limit, serverTimestamp, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global Firebase Variables (Provided by Canvas Environment)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth, userId;
+
+        // Firestore paths
+        const GREETINGS_COLLECTION_PATH = `artifacts/${appId}/public/data/greetings`;
+
+        // Utility to format timestamp
+        function formatTimestamp(timestamp) {
+            if (!timestamp) return 'Just now';
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp.seconds * 1000);
+            return date.toLocaleDateString('id-ID', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // 1. Initialize Firebase and Authenticate
+        async function initializeFirebase() {
+            try {
+                if (Object.keys(firebaseConfig).length === 0) {
+                    console.warn("Firebase config is missing. Data storage will not work.");
+                    return;
+                }
+                
+                // Set Firestore log level for debugging
+                setLogLevel('debug'); 
+
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Set auth persistence
+                await setPersistence(auth, browserSessionPersistence);
+
+                // Sign in logic
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        console.log("Firebase Auth Ready. User ID:", userId);
+                        // Once authenticated, start listening for greetings
+                        loadGreetings();
+                    } else {
+                        console.log("User signed out or failed to authenticate.");
+                    }
+                });
+
+            } catch (error) {
+                console.error("Firebase Initialization or Auth Error:", error);
+            }
+        }
+
+        // 2. Load Real-time Greetings (Ucapan)
+        function loadGreetings() {
+            if (!db) return;
+
+            const greetingsRef = collection(db, GREETINGS_COLLECTION_PATH);
+            // Fetch all, sort in memory (due to orderBy index requirements)
+            const q = query(greetingsRef); 
+
+            onSnapshot(q, (snapshot) => {
+                const greetingsList = [];
+                snapshot.forEach(doc => {
+                    greetingsList.push({ id: doc.id, ...doc.data() });
+                });
+                
+                // Sort by timestamp descending (most recent first) in memory
+                greetingsList.sort((a, b) => {
+                    const timeA = a.timestamp ? (a.timestamp.seconds || 0) : 0;
+                    const timeB = b.timestamp ? (b.timestamp.seconds || 0) : 0;
+                    return timeB - timeA;
+                });
+                
+                renderGreetings(greetingsList);
+            }, (error) => {
+                console.error("Error loading greetings:", error);
+                document.getElementById('greetings-list').innerHTML = `<p class="text-center text-red-500 font-body">Gagal memuat ucapan: ${error.message}</p>`;
+            });
+        }
+
+        // 3. Render Greetings to DOM
+        function renderGreetings(greetings) {
+            const listElement = document.getElementById('greetings-list');
+            listElement.innerHTML = ''; 
+
+            if (greetings.length === 0) {
+                listElement.innerHTML = `<p class="text-center text-gray-500 font-body">Belum ada ucapan. Jadilah yang pertama!</p>`;
+                return;
+            }
+
+            greetings.forEach((g) => {
+                const item = document.createElement('div');
+                item.className = 'bg-gray-800 p-4 border-l-4 border-valo-red rounded shadow-md valo-box-small';
+                item.innerHTML = `
+                    <p class="font-bold text-lg text-valo-red font-body">${g.name || 'Anonim'}</p>
+                    <p class="text-sm text-gray-400 mb-2 font-body">${g.attendance}, ${g.guests} Tamu</p>
+                    <p class="text-white italic font-body">"${g.message}"</p>
+                    <p class="text-xs text-gray-500 mt-2 text-right">${formatTimestamp(g.timestamp)}</p>
+                `;
+                listElement.appendChild(item);
+            });
+        }
+
+        // 4. RSVP Submission (Submits to Firestore)
+        window.submitRSVP = async function (e) {
+            e.preventDefault();
+            if (!db || !userId) {
+                showModal("Sistem belum siap. Mohon tunggu sebentar hingga koneksi terhubung.");
+                return;
+            }
+
+            const name = document.getElementById('rsvp-name').value.trim();
+            const guests = document.getElementById('rsvp-guest-count').value;
+            const attendance = e.target.querySelector('input[name="attend"]:checked').value;
+            const message = document.getElementById('rsvp-message').value.trim();
+            const submitBtn = document.getElementById('rsvp-submit-btn');
+            
+            if (name === "" || message === "") {
+                 showModal("Nama dan Ucapan tidak boleh kosong.");
+                 return;
+            }
+
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = "PROCESSING...";
+            submitBtn.disabled = true;
+
+            const rsvpData = {
+                name: name,
+                guests: guests,
+                attendance: attendance,
+                message: message,
+                timestamp: serverTimestamp(),
+                userId: userId, // Record the submitting user ID
+            };
+
+            try {
+                await addDoc(collection(db, GREETINGS_COLLECTION_PATH), rsvpData);
+                showModal("Terima kasih! Konfirmasi dan Ucapan Anda telah terkirim. Anda dapat melihatnya di bagian bawah.");
+                e.target.reset();
+
+                submitBtn.innerText = "TERKIRIM";
+                submitBtn.classList.add('bg-green-600', 'text-white');
+                
+                setTimeout(() => {
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('bg-green-600', 'text-white');
+                }, 3000);
+
+            } catch (error) {
+                console.error("Error submitting RSVP:", error);
+                showModal(`Gagal mengirim konfirmasi. Error: ${error.message}`);
+                submitBtn.innerText = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+        
+        initializeFirebase();
+    </script>
+
+
+    <script>
+        // Global JS Functions (Not using modules)
+
+        // Initialize Animate On Scroll
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // Opening Animation Logic
+        const openBtn = document.getElementById('open-btn');
+        const openingCurtain = document.getElementById('opening-curtain');
+        const body = document.body;
+
+        // Prevent scrolling initially
+        body.style.overflow = 'hidden';
+
+        openBtn.addEventListener('click', () => {
+            // Slide up animation
+            openingCurtain.classList.add('curtain-open');
+            
+            // Enable scrolling after animation
+            setTimeout(() => {
+                body.style.overflow = 'auto';
+                body.style.overflowX = 'hidden'; 
+                // Scroll to the next section after opening
+                document.getElementById('section-date').scrollIntoView();
+            }, 1000);
+        });
+
+        // Custom Modal Logic
+        const modal = document.getElementById('custom-modal');
+        const modalMessage = document.getElementById('modal-message');
+
+        function showModal(message) {
+            modalMessage.innerText = message;
+            modal.classList.remove('hidden');
+            modal.firstElementChild.classList.remove('scale-95');
+            modal.firstElementChild.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            modal.firstElementChild.classList.remove('scale-100');
+            modal.firstElementChild.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Copy to Clipboard
+        function copyToClipboard(text, bankName) {
+            // Remove spaces from the displayed text for copying
+            const cleanText = text.replace(/\s/g, ''); 
+            navigator.clipboard.writeText(cleanText).then(() => {
+                showModal(`Nomor Rekening ${bankName} berhasil disalin: ${cleanText}`);
+            }).catch(err => {
+                console.error('Gagal menyalin: ', err);
+                showModal("Gagal menyalin nomor rekening. Silakan salin manual.");
+            });
+        }
+        
+        // Countdown Timer Logic
+        function startCountdown() {
+            // Target date: 21 December 2025 (Set time to 00:00:00 for simplicity)
+            const targetDate = new Date("Dec 21, 2025 00:00:00").getTime();
+            const countdownEl = document.getElementById('countdown');
+
+            const interval = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    countdownEl.innerHTML = `<p class="text-3xl text-valo-red font-bold">THE TIME IS NOW!</p>`;
+                    return;
+                }
+
+                const units = [
+                    { value: days, label: 'Days' },
+                    { value: hours, label: 'Hours' },
+                    { value: minutes, label: 'Mins' },
+                    { value: seconds, label: 'Secs' }
+                ];
+
+                countdownEl.innerHTML = units.map(unit => `
+                    <div class="text-center p-3 bg-white/5 border border-valo-red/50 valo-box-small min-w-[70px]" data-aos="zoom-in" data-aos-duration="500">
+                        <span class="block text-4xl font-mono font-bold text-valo-red">${String(unit.value).padStart(2, '0')}</span>
+                        <span class="block text-xs uppercase text-gray-400 font-body">${unit.label}</span>
+                    </div>
+                `).join('');
+
+            }, 1000);
+        }
+
+        startCountdown();
+    </script>
+</body>
+</html>
